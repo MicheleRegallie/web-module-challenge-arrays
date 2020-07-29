@@ -40,20 +40,18 @@ To save you from having to count the items above, you can assume that length of 
 
 i.e. is31Flavors(originalFlavors) will return TRUE.*/
 
-function is31Flavors(num){
-
-    let flavorNum = originalFlavors.length;
-    if (flavorNum === 31){
+function is31Flavors(array){
+ 
+    if (originalFlavors === 31){
         console.log(true);
     }else{
         console.log(false);
     }
-
 }
 
-console.log(is31Flavors(22));
+console.log(is31Flavors(originalFlavors));
 
-//Not sure what I am missing, the problem prints out true but I do not think it is correct
+
 
 /* Task 2: Corporate has come to you with an idea for a new flavor: Rainbow Sherbert! They think this will be a game changer. You need to modify the array to include this flavor. 
 
@@ -66,11 +64,13 @@ Your function should add the flavor to the front of the array and console.log th
 
 For example addFlavor("Rainbow Sherbert", originalFlavors) should return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla Burnt Almond"] */ 
 
-function addFlavor(flavor, array){
-    return originalFlavors.push(flavor);
+function addFlavor(array, flavor){
+
+    let newArray = originalFlavors.unshift(flavor);
+    return newArray
 }
 
-console.log(addFlavor("Rainbow Sherbert", originalFlavors));
+console.log(addFlavor(originalFlavors, "Rainbow Sherbert"));
 
 //I am struggling with how to get this to print the array and not the array length
 
@@ -86,7 +86,8 @@ For example removeLastFlavor(originalFlavors) would return ["Rainbow Sherbert", 
 
 function removeLastFlavor(array){
 
-   return originalFlavors.pop()
+    let flavors = originalFlavors.pop();
+   return flavors
 
 }
 
@@ -101,7 +102,7 @@ Your function should accept:
 
 For example, getFlavorByIndex(originalFlavors, 2) would return "Black Walnut", assuming Rainbow Sherbert has been added successfully. */
 
-function getFlavorByIndex(/*code here*/){
+function getFlavorByIndex(array, index){
 
     /*code here*/
 
@@ -120,26 +121,40 @@ Hint: You can use .splice() for this
 
 */
 
-function removeFlavorByName(/*code here*/){
+function removeFlavorByName(array, flavor){     //create function
 
-    /*code here*/
+    let newArray = [];                          //creating new array 
 
-}
+    for (i=0; i > array.length; i++){           //for loop that goes through each index in the array
+        if (array[i] === flavor){               //checking to see if the index matches the flavor parameter
+            // console.log("it works");
+            array.splice(i, 1);                 //remove the flavor
+        } //end the block
+        newArray.push(array[i]);                //push(add) elements into the new array 
+    }//close the for loop
+    return newArray.length;                     //return the number of the elements found in the new array
+} //end of function
 
+let count = removeFlavorByName(originalFlavors, "Vanilla"); //runs the function and sets count equal to length of line 119
+console.log(count); //console.log number from line 122
 
 /* Task 6: With all of these changes going on, we don't want to lose track of the actual, original 31 flavors. Write a function called copy that makes a copy of the array. 
 
 Your function should accept: 
 
-2 arguments 1 for your new array and one for your original array
+2 arguments: 1 for your new array, and one for your original array
 
 and should return a new array that is identical to the old array. You can name the new array however you'd like. */
 
-function copy(/*code here*/){
+function copy(newArr, origArr){
 
+    newArr = [...origArr];      //using the spread operator, takes a look at the entire array and takes it apart and puts into newArr
+    return newArr;              //returning the newest array
     /*code here*/
 
 }
+
+console.log(copy('backup', originalFlavors));
 
 /* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors. Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values. Rather than hardcoding "chocolate" into your function, pass a string as a parameter, and invoke with the argument "chocolate". This way you could also filter for "Vanilla", "Sherbert", etc. when those holidays roll around.
 
