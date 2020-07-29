@@ -42,10 +42,10 @@ i.e. is31Flavors(originalFlavors) will return TRUE.*/
 
 function is31Flavors(array){
  
-    if (originalFlavors === 31){
-        console.log(true);
+    if (array.length === 31){         //need to add.length
+        return true;
     }else{
-        console.log(false);
+        return false;
     }
 }
 
@@ -66,13 +66,16 @@ For example addFlavor("Rainbow Sherbert", originalFlavors) should return ["Rainb
 
 function addFlavor(array, flavor){
 
-    let newArray = originalFlavors.unshift(flavor);
-    return newArray
+
+    array.unshift(flavor);              //just a note, no need to create a new array
+
+    return array;                    
 }
+
 
 console.log(addFlavor(originalFlavors, "Rainbow Sherbert"));
 
-//I am struggling with how to get this to print the array and not the array length
+
 
 /* Task 3: Houston, we have a problem! There are now 32 flavors in the array! Your task is to remove an item from the end of the array. 
 
@@ -84,14 +87,28 @@ Your function should remove a flavor from the end of the array and console.log t
 
 For example removeLastFlavor(originalFlavors) would return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla"]*/ 
 
-function removeLastFlavor(array){
+function removeLastFlavor(arr){
 
-    let flavors = originalFlavors.pop();
-   return flavors
+
+    arr.pop();
+
+    // return arr.length; //returns the amount of the items in the array, but I want to return the entire array
+
+    return arr; //this will not return the entire array, something is keeping this from properly working
 
 }
 
 console.log(removeLastFlavor(originalFlavors));
+
+//Example for above code
+
+// myArr = [1, 2, 3, 4, 5];
+    // function myFunction(arr) {
+    //     arr.pop();
+    //     return arr;
+    // }
+    // console.log(myFunction(myArr))
+
 
 /* Task 4: Write a function that returns a flavor at a given index in the array.
 
@@ -104,9 +121,21 @@ For example, getFlavorByIndex(originalFlavors, 2) would return "Black Walnut", a
 
 function getFlavorByIndex(array, index){
 
-    /*code here*/
+    let flavor = array[index];
+    return flavor;
 
 }
+
+console.log(getFlavorByIndex(originalFlavors, 2));
+
+//Example code for above function
+// let flavors = ['apple', 'vanilla', 'strawberry'];
+// function myFlavor(arr, index) {
+//     let flavor = arr[index];
+//     return flavor;
+// }
+// console.log(myFlavor(flavors, 1))
+
 
 /* Task 5: As corporate wants to add more and more flavors to their lineup, they've realized that they need to remove flavors based on flavor name, as opposed to just arbitrarily removing the first or last flavor. Your task is to get an index by flavor name, and remove that flavor from the array. 
 
@@ -138,6 +167,7 @@ function removeFlavorByName(array, flavor){     //create function
 let count = removeFlavorByName(originalFlavors, "Vanilla"); //runs the function and sets count equal to length of line 119
 console.log(count); //console.log number from line 122
 
+
 /* Task 6: With all of these changes going on, we don't want to lose track of the actual, original 31 flavors. Write a function called copy that makes a copy of the array. 
 
 Your function should accept: 
@@ -150,7 +180,7 @@ function copy(newArr, origArr){
 
     newArr = [...origArr];      //using the spread operator, takes a look at the entire array and takes it apart and puts into newArr
     return newArr;              //returning the newest array
-    /*code here*/
+
 
 }
 
@@ -171,13 +201,21 @@ DO NOT USE ADVANCED ARRAY METHODS (i.e. .filter) to solve this problem.
 
 hint - you can use the .includes method to help you solve this */
 
-function filterByWord(/*code here*/){
+function filterByWord(arr, string){
 
-    /*code here*/
+    let filteredArray = [];                         //creating new array 
+
+    for (i=0; i > array.length; i++){           //for loop that goes through each index in the array
+        if (array[i] == string){               //checking to see if the index matches the string parameter
+            // console.log("it works");
+            filteredArray.push(array[i]);              //add to new array
+        } //end the block                
+    }//close the for loop
+    return filteredArray;                      //print new array
 
 }
 
-
+console.log(filterByWord(originalFlavors, "Chocolate"));
 
 /* 🧁🍦🍨 STRETCH 🍨🍦🍫*/ 
 
